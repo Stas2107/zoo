@@ -92,7 +92,18 @@ my_zoo.add_animal(reptile)
 my_zoo.add_employee(zooKeeper)
 my_zoo.add_employee(veterinarian)
 
-# Выведет звуки всех животных в зоопарке
+# действия в зоопарке
 my_zoo.all_animals_sound()
+veterinarian.heal_animal(straus.name)
+zooKeeper.feed_animal(panda.name)
 
-zooKeeper.heal_animal(straus.name)
+# сохранить список фивотных и работников в файлы
+with open("animals.txt", "w", encoding='utf-8') as animals:
+    for animal in my_zoo.animals:
+        animals.write(str(animal.name) + '\n')
+
+with open("employers.txt", "w", encoding='utf-8') as employees:
+    for employee in my_zoo.employees:
+        employees.write(str(employee.name) + '\n')
+
+
