@@ -9,7 +9,7 @@
 # 5. Создайте классы для сотрудников, например, `ZooKeeper`, `Veterinarian`, которые могут иметь специфические методы (например, `feed_animal()`
 # для `ZooKeeper` и `heal_animal()` для `Veterinarian`).
 
-class Animal():
+class Animal:
     def __init__(self, name, age):
         self.name = name
         self.age = age
@@ -18,31 +18,81 @@ class Animal():
         print("")
 
     def eat(self):
-        print("оно кушает")
+        print(f"{self.name} кушает")
+
 
 class Bird(Animal):
     def __init__(self, name, age, take_egg):
-        self.name = name
-        self.age = age
+        super().__init__(name, age)
         self.take_egg = take_egg
 
+    def make_sound(self):
+        print("А-А-А-А")
+
+
 class Mammal(Animal):
-    def __init__(self, name, age, hear_cut):
-        self.name = name
-        self.age = age
-        self.hear_cut = hear_cut
+    def __init__(self, name, age, hair_cut):
+        super().__init__(name, age)
+        self.hair_cut = hair_cut
+
+    def make_sound(self):
+        print("фух-ты фух-ты")
+
 
 class Reptile(Animal):
     def __init__(self, name, age, clear_skin):
-        self.name = name
-        self.age = age
+        super().__init__(name, age)
         self.clear_skin = clear_skin
 
+    def make_sound(self):
+        print("Пшшшш")
 
+
+class Employee:
+    def __init__(self, name, position):
+        self.name = name
+        self.position = position
+
+    def work(self):
+        print(f"{self.name}, {self.position}, на работе.")
+
+    def feed_animal(self, any):
+        print(f"{self.name} покормил {any}")
+
+    def heal_animal(self, any):
+        print(f"{self.name} полечил {any}")
+
+class Zoo:
+    def __init__(self):
+        self.animals = []
+        self.employees = []
+
+    def add_animal(self, animal):
+        self.animals.append(animal)
+
+    def add_employee(self, employee):
+        self.employees.append(employee)
+
+    def all_animals_sound(self):
+        for animal in self.animals:
+            animal.make_sound()
+
+
+# Создание объектов
 straus = Bird("Коаткоцапль", 12, 2)
 panda = Mammal("Линдзянь", 24, 12)
 reptile = Reptile("Каа", 60, 6)
+zooKeeper = Employee("Дядя Ваня", "смотритель")
+veterinarian = Employee("Тетя Нина", "ветеринар")
 
+my_zoo = Zoo()
+my_zoo.add_animal(straus)
+my_zoo.add_animal(panda)
+my_zoo.add_animal(reptile)
+my_zoo.add_employee(zooKeeper)
+my_zoo.add_employee(veterinarian)
 
+# Выведет звуки всех животных в зоопарке
+my_zoo.all_animals_sound()
 
-straus.eat()
+zooKeeper.heal_animal(straus.name)
